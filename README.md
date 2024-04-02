@@ -99,13 +99,19 @@ https://ozmap-technical-assessment-int-dm.onrender.com/docs
 
 ## Testes
 
+Rode os testes com esse comando: 
+
+```bash
+npm run test:all
+```
+
 <p align="center">
     <img src="./.github/img/tests.png" alt="tests" width="1200px">
 </p>
 
 ## Insomnia
 
-Se você optar por fazer as solicitações usando o Insomnia, pode importar todas as coleções de solicitações a partir do arquivo insomnia_ozmap.json localizado na raiz do projeto. 
+Se você optar por fazer as solicitações usando o Insomnia, pode importar todas as coleções de solicitações a partir do arquivo `insomnia_ozmap.json` localizado na raiz do projeto. 
 
 ## Sobre
 
