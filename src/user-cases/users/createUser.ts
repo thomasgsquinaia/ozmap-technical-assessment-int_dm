@@ -2,7 +2,7 @@ import { NewUser, UserRequestBody } from "../../interfaces/users";
 import { UserModel } from "../../models/models";
 import geoLib from "../../services/geoLib";
 import Joi from 'joi';
-import formatAddress from "../../utils/adrress";
+import formatAddress from "../../utils/address";
 
 const input_schema = Joi.object({
   name: Joi.string().label("name").required(),

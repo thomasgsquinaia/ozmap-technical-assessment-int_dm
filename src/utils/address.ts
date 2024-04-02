@@ -8,4 +8,4 @@ const formatAddress = ({ city, country, neighborhood, state, street, zipCode, nu
     return `${street} - ${neighborhood}, ${city} - ${state}, ${zipCode}, ${country}`;
   };
   
-  export default formatAddress;
+export default formatAddress;
