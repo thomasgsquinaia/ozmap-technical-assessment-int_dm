@@ -1,69 +1,118 @@
-# OZmap Challenge: Construindo a Geolocalização do Futuro
+# OZmap
 
-Olá desenvolvedor(a)! Bem-vindo(a) ao Desafio Técnico do OZmap. Este é um projeto que simula um cenário real de nossa empresa, onde você irá desempenhar um papel crucial ao desenvolver uma API RESTful robusta para gerenciar usuários e localizações. Estamos muito animados para ver sua abordagem e solução!
+## API RESTful robusta para gerenciar usuários e localizações.
 
-## 🌍 **Visão Geral**
+Este projeto foi construido com **NodeJs, TypeScript, Express.js, MongoDB, Docker, Mocha, Chai, Vitest e Swagger.**
 
-Em um mundo conectado e globalizado, a geolocalização se torna cada vez mais essencial. E aqui no OZmap, buscamos sempre otimizar e melhorar nossos sistemas. Assim, você encontrará um protótipo que precisa de sua experiência para ser corrigido, melhorado e levado ao próximo nível.
+## Índice
 
-## 🛠 **Especificações Técnicas**
+- [Instalação API](#instalação-api)
+- [API Endpoints](#api-endpoints)
+- [Documentação](#documentação)
+- [Testes](#testes)
+- [Insomnia](#insomnia)
+- [Sobre](#sobre)
 
-- **Node.js**: Versão 20 ou superior.
-- **Banco de Dados**: Mongo 7+.
-- **ORM**: Mongoose / Typegoose.
-- **Linguagem**: Typescript.
-- **Formatação e Linting**: Eslint + prettier.
-- **Comunicação com MongoDB**: Deve ser feita via container.
+## Instalação API
 
-## 🔍 **Funcionalidades Esperadas**
+1. Clonar o repositório:
 
-### Usuários
-- **CRUD** completo para usuários.
-- Cada usuário deve ter nome, email, endereço e coordenadas.
-- Na criação, o usuário pode fornecer endereço ou coordenadas. Haverá erro caso forneça ambos ou nenhum.
-- Uso de serviço de geolocalização para resolver endereço ↔ coordenadas.
-- Atualização de endereço ou coordenadas deve seguir a mesma lógica.
+```bash
+git clone https://github.com/thomasgsquinaia/ozmap-technical-assessment-int_dm.git
+```
 
-### Regiões
-- **CRUD** completo para regiões.
-- Cada região tem um nome, coordenadas e um usuário que será o dono da região.
-- Listar regiões contendo um ponto específico.
-- Listar regiões a uma certa distância de um ponto, com opção de filtrar regiões não pertencentes ao usuário que fez a requisição.
+2. Ir para a branch "thomasquinaia":
 
-### Autenticação
-- Autenticação não é necessária.
+```bash
+git switch thomasquinaia
+```
 
-### Testes
-- Unitários e de integração.
+3. Instalar as dependências: 
 
-## 🌟 **Diferenciais**
+```bash
+npm install
+```
 
-- Documentação completa da API.
-- Interface para visualização de logs.
-- Exportação de relatórios (.csv).
-- Cobertura de código.
+4. Crie um arquivo .env contendo as mesmas variáveis de ambiente presentes no arquivo .env.example, segue o exemplo abaixo:
 
-## ⚖ **Critérios de Avaliação**
+```markdown
+API_PORT=3001
+DB_PORT=27017
+MONGODB_URI="mongodb+srv://root:root@clusterozmap.q6natw5.mongodb.net/"
+GOOGLE_API_KEY="YOUR_API_KEY"
+GOOGLE_GEOCODING_REVERSE_API_URL="https://maps.googleapis.com/maps/api/geocode/json?latlng="
+GOOGLE_GEOCODING_API_URL="https://maps.googleapis.com/maps/api/geocode/json?address="
+DB_NAME="oz-tech-test"
+DB_USER="root"
+DB_PASS="MongoDB2019!"
+```
 
-1. Organização e clareza do código.
-2. Estruturação do projeto.
-3. Qualidade e eficiência do código.
-4. Cobertura e qualidade de testes.
-5. Pontos diferenciais citados acima.
-6. Tempo de entrega.
-7. Padronização e clareza das mensagens de erro.
-8. Organização dos commits.
-9. Implementação de logs.
-10. Adesão às boas práticas de API RESTful.
+6. Verifique se tem algum container rodando e rode isso para parar a execução dele: 
 
-## 🚀 **Entrega**
+```bash
+docker-compose down --remove-orphans
+```
 
-1. Faça um fork deste repositório.
-2. Crie uma branch com o padrão `seu-nome-sobrenome`.
-3. Ao finalizar, faça um pull request para a branch `main` deste repositório.
-4. Envie um email `rh@ozmap.com.br` informando que o teste foi concluído.
-5. Aguarde nosso feedback.
+7. Rode o projeto com o comando: 
 
----
+```bash
+docker-compose up --build
+```
 
-Estamos ansiosos para ver sua implementação e criatividade em ação! Boa sorte e que a força do código esteja com você! 🚀
+8. Aguarde até que os contêineres estejam prontos para uso.
+
+
+## API Endpoints
+A API fornece os seguintes endpoints:
+
+**API USUÁRIOS**
+```markdown
+GET /users - Lista usuários cadastrados.
+GET /users/:id - Lista um usuário específico cadastrado - {id}. 
+POST /users - Cria um usuário - {name, email, address, coordinates}.
+PUT /users/:id - Atualiza um usuário - {name, email, address, coordinates}.
+DELETE /users/:id - Deleta um usuário específico - {id}.
+```
+
+**API REGIÕES**
+```markdown
+GET /regions - Lista regiões cadastradas.
+GET /regions/:id - Lista uma região específica cadastrada.
+GET /regions/distance - Retonar regiões em um raio de distância a partir das coordenadas informadas e podendo filtrar por um usuário específico - {lat, lng, distance, user}.
+GET /regions/:lat/:lng/specific - Retorna a listagem de regiões a uma certa distância de um ponto - {lat, lng}.
+POST /regions - Cria uma região - {name, coordinates, user}.
+PUT /regions/:id - Atualiza uma região - {name, coordinates, user}.
+DELETE /regions/:id - Deleta uma região específica - {id}.
+```
+
+## Documentação
+
+### Caso deseje entre nesse link para ver a documentação: 
+
+```markdown
+https://ozmap-technical-assessment-int-dm.onrender.com/docs
+```
+
+<p align="center">
+    <img src="./.github/img/docs-api.png" alt="docs-api" width="1200px">
+</p>
+
+## Testes
+
+Rode os testes com esse comando: 
+
+```bash
+npm run test:all
+```
+
+<p align="center">
+    <img src="./.github/img/tests.png" alt="tests" width="1200px">
+</p>
+
+## Insomnia
+
+Se você optar por fazer as solicitações usando o Insomnia, pode importar todas as coleções de solicitações a partir do arquivo `insomnia_ozmap.json` localizado na raiz do projeto. 
+
+## Sobre
+
+Linkedin: https://www.linkedin.com/in/thomas-quinaia-82b5221b1/
